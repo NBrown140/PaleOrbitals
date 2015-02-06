@@ -1,0 +1,9 @@
+ &NAMSTD
+ datefin   = 20.D0,
+ datedebut = -50.D0,
+ pas       = 1000,
+ nominsolbin = 'SOLCLI.BIN',
+ nomclimapos = 'INSOLP.LA2004.BTL.ASC',
+ nomclimaneg = 'INSOLN.LA2004.BTL.ASC',
+ so  = 1368.D0, 
+//

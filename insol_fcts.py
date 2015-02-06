@@ -32,10 +32,6 @@ def wmcal(month,e,eps,pibarh,phi,w)
 		
 	OUT:
 		w: monthly insolation at given latitude
-
-	Last Modified:
-		Nicolas Brown (02/2015)
-
 	"""
 	
 	

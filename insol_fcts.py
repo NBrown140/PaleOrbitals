@@ -77,7 +77,7 @@ def cwj(So,wd,e,pibar,eps,phi):
 		w: daily insolation...................................... float
 	"""
 	# Convert input to floats if not already done
-	wd,e,pibar,eps,phi = float(wd),float(e),float(pibar),float(eps),float(phi)
+	So,wd,e,pibar,eps,phi = float(So),float(wd),float(e),float(pibar),float(eps),float(phi)
 	
 	# True anomaly
 	v = wd - pibar

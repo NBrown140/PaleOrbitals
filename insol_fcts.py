@@ -16,6 +16,7 @@ Modifications:
 import math as m
 
 
+
 def true_avg(hl,e,pibar):
 	"""
 	Calculates average longitude(hlm) from true longitude(hl), eccentricity(e)
@@ -29,6 +30,7 @@ def true_avg(hl,e,pibar):
 	OUT:
 		hlm: average longitude................................... float
 	"""
+	
 	# Convert input to floats if not already done
 	hl,e,pibar = float(hl),float(e),float(pibar)
 	
@@ -50,6 +52,7 @@ def avg_true(hlm,e,pibar):
 	OUT:
 		hl: true longitude....................................... float
 	"""
+	
 	# Convert input to floats if not already done
 	hlm,e,pibar = float(hlm),float(e),float(pibar)
 	
@@ -59,12 +62,13 @@ def avg_true(hlm,e,pibar):
 	+1097*e**5/960*m.sin(5*eM)
 
 
-def cwj(So,wd,e,pibar,eps,phi):
+
+def cwj(S0,wd,e,pibar,eps,phi):
 	"""
 	Daily insolation for a given latitude
 	
 	IN:
-		So: solar constant....................................... float or int
+		S0: solar constant....................................... float or int
 		wd: true longitude of sun (in radians) from
 		    equinox at date...................................... float or int
 		e: eccentricity.......................................... float or int
@@ -76,8 +80,9 @@ def cwj(So,wd,e,pibar,eps,phi):
 	OUT:
 		w: daily insolation...................................... float
 	"""
+	
 	# Convert input to floats if not already done
-	So,wd,e,pibar,eps,phi = float(So),float(wd),float(e),float(pibar),float(eps),float(phi)
+	S0,wd,e,pibar,eps,phi = float(S0),float(wd),float(e),float(pibar),float(eps),float(phi)
 	
 	# True anomaly
 	v = wd - pibar
@@ -100,17 +105,100 @@ def cwj(So,wd,e,pibar,eps,phi):
 		ho = m.acos(-1*m.tan(phi) * m.tan(delta))
 		# Insolation
 		return (ho*m.sin(phi)*m.sin(delta) + m.cos(phi)*m.cos(delta)*m.sin(ho)) \
-		* So/(m.pi*rho**2)
+		* S0/(m.pi*rho**2)
 		
 	## (2) No sunset
 	elif (phi > a1) or (phi < -1*a2):
-		return So * m.sin(phi)*m.sin(delta) / rho**2
+		return S0 * m.sin(phi)*m.sin(delta) / rho**2
 		
 	## (3) No sunrise
 	elif (phi < -1*a1) or (phi > a2):
 		return 0.
 	
 	print 'Should never get here! if-statements should contain all possibilities'
+
+
+
+def wjour(S0,date,e,eps,pibarh,phi):
+	"""
+	Daily insolation for a given latitude
+	
+	IN:
+		S0: solar constant....................................... float or int
+		date: true longitude of sun (in degrees) from
+		      true equinox at date............................... float or int
+		e: eccentricity.......................................... float or int
+		pibarh: longitude of perihelion from equinox
+		        at date.......................................... float or int
+		eps: obliquity........................................... float or int
+		phi: latitude on Earth................................... float or int
+	OUT:
+		w: daily insolation...................................... float
+	"""
+	
+	# Convert input to floats if not already done
+	S0,date,e,pibarh,eps,phi = float(S0),float(date),float(e),float(pibarh),float(eps),float(phi)
+
+	# Convert pibarh to longitude of perihelion from equinox at date + pi
+	pibar = pibarh + m.pi
+	# Convert date to radians
+	hl = m.radians(date)
+	
+	return cwj(S0,hl,e,pibar,eps,phi)
+
+
+
+def wjcal(S0,datecal,e,eps,pibarh,phi):
+	"""
+	Daily insolation for a given latitude
+	
+	IN:
+		S0: solar constant....................................... float or int
+		datecal: avg longitude of sun (in degrees) from
+		         equinox at date................................. float or int
+		e: eccentricity.......................................... float or int
+		pibarh: longitude of perihelion from equinox
+		        at date.......................................... float or int
+		eps: obliquity........................................... float or int
+		phi: latitude on Earth................................... float or int
+	OUT:
+		w: daily insolation...................................... float
+	"""
+	
+	# Convert input to floats if not already done
+	S0,datecal,e,pibarh,eps,phi = float(S0),float(datecal),float(e),float(pibarh),float(eps),float(phi)
+
+	# Convert pibarh to longitude of perihelion from equinox at date + pi
+	pibar = pibarh + m.pi	
+	# Convert datecal to radians, obtain true longitude
+	hlm = m.radians(datecal)
+	# Get true longitude on March 21st
+	hlm0 = true_avg(0.,e,pibar)
+	# Avg longitude at date
+	hlm = hlm0 + hlm
+	# True longitude at date
+	wd = avg_true(hlm,e,pibar,)
+	
+	return cwj(S0,wd,e,pibar,eps,phi)
+
+
+
+def wam(S0,e):
+	""""
+	Annual global average insolation	
+	
+	IN:
+		e: eccentricity.......................................... float or int
+		
+	OUT:
+		w: annual global average insolation...................... float
+	"""
+	
+	# Convert input to floats if not already done
+	S0,e = float(S0),float(e)
+	
+	return S0/(4.*m.sqrt(1.-e**2))
+	
 	
 
 def wmcal(month,e,eps,pibarh,phi):

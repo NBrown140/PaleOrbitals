@@ -14,6 +14,7 @@ Modifications:
 
 """
 import math as m
+import scipy.integrate.romberg
 
 
 
@@ -221,5 +222,23 @@ def wmcal(month,e,eps,pibarh,phi):
 		w: monthly insolation at given latitude
 	"""
 	
+	# Convert pibarh to longitude of perihelion from equinox at date + pi
+	pibar = pibarh + m.pi	
+	# Average longitude on March 21st
+	hlm0 = true_avg(0.,2,pibar)
+	# Average longitude at beginning of month
+	hlm1 = hlm0 + (month-4)*m.pi*30./180
+	# Average longitude at end of month
+	hlm2 = hlm1 + 30.*m.pi/180
 	
-	pibar = pibarh + pi
+	# Define function F to integrate
+	def F(hlm):
+		hl = avg_true(hlm,e,pibar)
+		return cwj(hl,e,pibar,eps,phi)
+		
+	# Calculate insolation with Romberg Integration
+	w = scipy.integrate.romberg(F,hlm1,hlm2)
+	w = w/30./m.pi*180.
+	return w
+	
+	

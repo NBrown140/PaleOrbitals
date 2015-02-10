@@ -14,7 +14,7 @@ Modifications:
 
 """
 import math as m
-import scipy.integrate.romberg
+import scipy.integrate
 
 
 
@@ -189,6 +189,7 @@ def wam(S0,e):
 	Annual global average insolation	
 	
 	IN:
+		S0: solar constant....................................... float or int
 		e: eccentricity.......................................... float or int
 		
 	OUT:
@@ -202,26 +203,26 @@ def wam(S0,e):
 	
 	
 
-def wmcal(month,e,eps,pibarh,phi):
+def wmcal(S0,month,e,eps,pibarh,phi):
 	"""
 	Monthly insolation for a given latitude 
 	
-	Dependencies:
-		trueavg()
-		
-	
 	IN:
-		month: 
-		e,eps,pibarh: orbital elements for date tps
-			e: eccentricity
-			eps: obliquity
-			pibarh: longitude of perihelion from equinox at given date
-		phi: latitude of point on Earth
+		S0: solar constant.................................................... float or int
+		month: number of month (year is divided in 12 months of 30 degrees,
+			   and number 3 corresponds to end-February to end-March)......... float or int
+		e: eccentricity....................................................... float or int
+		eps: obliquity........................................................ float or int
+		pibarh: longitude of perihelion from equinox at given date............ float or int
+		phi: latitude of point on Earth....................................... float or int
 		
 	OUT:
-		w: monthly insolation at given latitude
+		w: monthly insolation at given latitude............................... float
 	"""
 	
+	# Convert input to floats if not already done
+	S0,month,e,eps,pibarh,phi = float(S0),float(month),float(e),float(eps),float(pibarh),float(phi)
+
 	# Convert pibarh to longitude of perihelion from equinox at date + pi
 	pibar = pibarh + m.pi	
 	# Average longitude on March 21st
@@ -234,7 +235,7 @@ def wmcal(month,e,eps,pibarh,phi):
 	# Define function F to integrate
 	def F(hlm):
 		hl = avg_true(hlm,e,pibar)
-		return cwj(hl,e,pibar,eps,phi)
+		return cwj(S0,hl,e,pibar,eps,phi)
 		
 	# Calculate insolation with Romberg Integration
 	w = scipy.integrate.romberg(F,hlm1,hlm2)

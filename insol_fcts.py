@@ -241,5 +241,3 @@ def wmcal(S0,month,e,eps,pibarh,phi):
 	w = scipy.integrate.romberg(F,hlm1,hlm2)
 	w = w/30./m.pi*180.
 	return w
-	
-	

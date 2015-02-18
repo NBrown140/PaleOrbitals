@@ -17,10 +17,10 @@ It would be nice to have a few methods of computing the same insolation values
 to test the method-dependence of output insolations. Right now, the only method
 available is based on Laskar2004's fortran program: http://www.imcce.fr/Equipes/ASD/insola/earth/La2004/index.html
 
-The final addition would be functions for the statistical analysis of insolation
+Another addition would be functions for the statistical analysis of insolation
 output. I'm thinking moslty of like power spectrum time series of insolation as a
 function of latitude.But, the main objective of the library is to easily produce
 useful insolation values from latitude and time (or orbital parameters directly). The
 analyzing and plotting can be done outside this library.
 
-
+Finally, it would be ideal to have an ipython-notebook or jupyter-notebook that goes though all the calculations in detail.

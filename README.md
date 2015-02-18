@@ -1,6 +1,8 @@
 # PaleOrbitals
 Python library to compute and analyze paleo-insolations.
 
+Written in Python2.7
+
 Depends on Python libraries:
   - standard python libraries (math,...)
   - numpy, scipy

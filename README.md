@@ -23,4 +23,4 @@ function of latitude.But, the main objective of the library is to easily produce
 useful insolation values from latitude and time (or orbital parameters directly). The
 analyzing and plotting can be done outside this library.
 
-Finally, it would be ideal to have an ipython-notebook or jupyter-notebook that goes though all the calculations in detail.
+Finally, it would be ideal to have an ipython-notebook that goes though all the calculations in detail.

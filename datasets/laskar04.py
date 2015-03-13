@@ -50006,10 +50006,3 @@ laskar = array([
 4999.9	0.025779396	23.95034186	284.106662
 5000	0.025781052	23.94442199	282.7277222 
 ])
- 
-laskar_age   = laskar[:,0];
-laskar_ecc = laskar[:,1];
-laskar_obl = laskar[:,2];
-laskar_pre = laskar[:,3];
-
-print laskar_age

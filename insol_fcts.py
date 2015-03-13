@@ -10,8 +10,6 @@ which became true_avg and avg_true, respectively.
 
 Modified by Nicolas Brown (02/2015)
 
-Modifications:
-
 """
 import math as m
 import scipy.integrate
@@ -24,12 +22,12 @@ def true_avg(hl,e,pibar):
 	and longitude of perihelion(pibar).
 	
 	IN:
-		hl: true longitude....................................... float or int
-		e: eccentricity.......................................... float or int
-		pibar: longitude of perihelion........................... float or int
+		hl: true longitude (rad)............................................. float or int
+		e: eccentricity...................................................... float or int
+		pibar: longitude of perihelion (rad)................................. float or int
 		
 	OUT:
-		hlm: average longitude................................... float
+		hlm: average longitude (rad)......................................... float
 	"""
 	
 	# Convert input to floats if not already done
@@ -46,12 +44,12 @@ def avg_true(hlm,e,pibar):
 	and longitude of perihelion(pibar).
 	
 	IN:
-		hlm: average longitude................................... float or int
-		e: eccentricity.......................................... float or int
-		pibar: longitude of perihelion........................... float or int
+		hlm: average longitude (rad)......................................... float or int
+		e: eccentricity...................................................... float or int
+		pibar: longitude of perihelion (rad)................................. float or int
 		
 	OUT:
-		hl: true longitude....................................... float
+		hl: true longitude (rad)............................................. float
 	"""
 	
 	# Convert input to floats if not already done
@@ -69,17 +67,16 @@ def cwj(S0,wd,e,pibar,eps,phi):
 	Daily insolation for a given latitude
 	
 	IN:
-		S0: solar constant....................................... float or int
-		wd: true longitude of sun (in radians) from
-		    equinox at date...................................... float or int
-		e: eccentricity.......................................... float or int
+		S0: solar constant (W m-2)........................................... float or int
+		wd: true longitude of sun from equinox at date (rad)................. float or int
+		e: eccentricity...................................................... float or int
 		pibar: longitude of perihelion from equinox
-		       at date + pi...................................... float or int
-		eps: obliquity........................................... float or int
-		phi: latitude on Earth................................... float or int
+		       at date + pi (rad)............................................ float or int
+		eps: obliquity (rad)................................................. float or int
+		phi: latitude on Earth (rad)......................................... float or int
 		
 	OUT:
-		w: daily insolation...................................... float
+		w: daily insolation (W m-2).......................................... float
 	"""
 	
 	# Convert input to floats if not already done
@@ -125,16 +122,14 @@ def wjour(S0,date,e,eps,pibarh,phi):
 	Daily insolation for a given latitude
 	
 	IN:
-		S0: solar constant....................................... float or int
-		date: true longitude of sun (in degrees) from
-		      true equinox at date............................... float or int
-		e: eccentricity.......................................... float or int
-		pibarh: longitude of perihelion from equinox
-		        at date.......................................... float or int
-		eps: obliquity........................................... float or int
-		phi: latitude on Earth................................... float or int
+		S0: solar constant (W m-2)........................................... float or int
+		date: true longitude of sun from true equinox at date (deg).......... float or int
+		e: eccentricity...................................................... float or int
+		pibarh: longitude of perihelion from equinox at date (rad)........... float or int
+		eps: obliquity (rad)................................................. float or int
+		phi: latitude on Earth (rad)......................................... float or int
 	OUT:
-		w: daily insolation...................................... float
+		w: daily insolation (W m-2).......................................... float
 	"""
 	
 	# Convert input to floats if not already done
@@ -154,16 +149,14 @@ def wjcal(S0,datecal,e,eps,pibarh,phi):
 	Daily insolation for a given latitude
 	
 	IN:
-		S0: solar constant....................................... float or int
-		datecal: avg longitude of sun (in degrees) from
-		         equinox at date................................. float or int
-		e: eccentricity.......................................... float or int
-		pibarh: longitude of perihelion from equinox
-		        at date.......................................... float or int
-		eps: obliquity........................................... float or int
-		phi: latitude on Earth................................... float or int
+		S0: solar constant (W m-2)........................................... float or int
+		datecal: avg longitude of sun from equinox at date (deg)............. float or int
+		e: eccentricity...................................................... float or int
+		pibarh: longitude of perihelion from equinox at date (rad)........... float or int
+		eps: obliquity (rad)................................................. float or int
+		phi: latitude on Earth (rad)......................................... float or int
 	OUT:
-		w: daily insolation...................................... float
+		w: daily insolation (W m-2).......................................... float
 	"""
 	
 	# Convert input to floats if not already done
@@ -189,11 +182,11 @@ def wam(S0,e):
 	Annual global average insolation	
 	
 	IN:
-		S0: solar constant....................................... float or int
-		e: eccentricity.......................................... float or int
+		S0: solar constant (W m-2)........................................... float or int
+		e: eccentricity...................................................... float or int
 		
 	OUT:
-		w: annual global average insolation...................... float
+		w: annual global average insolation (W m-2).......................... float
 	"""
 	
 	# Convert input to floats if not already done
@@ -208,16 +201,16 @@ def wmcal(S0,month,e,eps,pibarh,phi):
 	Monthly insolation for a given latitude 
 	
 	IN:
-		S0: solar constant.................................................... float or int
+		S0: solar constant (W m-2)........................................... float or int
 		month: number of month (year is divided in 12 months of 30 degrees,
-			   and number 3 corresponds to end-February to end-March)......... float or int
-		e: eccentricity....................................................... float or int
-		eps: obliquity........................................................ float or int
-		pibarh: longitude of perihelion from equinox at given date............ float or int
-		phi: latitude of point on Earth....................................... float or int
+			   and number 3 corresponds to end-February to end-March)........ float or int
+		e: eccentricity...................................................... float or int
+		eps: obliquity (rad)................................................. float or int
+		pibarh: longitude of perihelion from equinox at given date (rad)..... float or int
+		phi: latitude of point on Earth (rad)................................ float or int
 		
 	OUT:
-		w: monthly insolation at given latitude............................... float
+		w: monthly insolation at given latitude (W m-2)...................... float
 	"""
 	
 	# Convert input to floats if not already done

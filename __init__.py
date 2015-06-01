@@ -13,3 +13,4 @@ __version__ = "0.1.0"
 __authors__ = "Nicolas Brown (NBrown140)"
 __license__ = ""
 __copyright__ = ""
+__all__ = ["insol_fcts","parameters_fcts"]
